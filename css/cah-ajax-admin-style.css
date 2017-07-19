@@ -15,12 +15,20 @@
   .table-container #existing-queries tr:nth-child(odd) {
     background-color: rgba(150, 150, 150, 0.5); }
 
+span.tooltip {
+  font-style: italic;
+  font-size: 12px;
+  margin: 0px 5px; }
+
 .form-div {
-  width: 80%; }
-  .form-div span.tooltip {
-    font-style: italic;
-    font-size: 12px;
-    margin: 0px 5px; }
+  width: 78%;
+  margin-top: 20px;
+  padding: 5px 10px 10px 10px;
+  border: 1px solid #c8c8c8;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px; }
 
 #categories {
   margin-bottom: 5px; }

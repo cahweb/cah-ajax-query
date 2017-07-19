@@ -494,6 +494,10 @@ function cah_ajax_query_retrieve_index() {
 
             $resp_HTML .= ( in_category( 'aquifer' ) ) ? ' class="aqf">' : ' class="tfr">';
 
+            $resp_HTML .= '<img src="' . plugin_dir_url( __FILE__ );
+            $resp_HTML .= ( in_category( 'aquifer' ) ) ? 'images/TFR-Aquifer-Bullet.svg' : 'images/TFR-Bird-Bullet.svg';
+            $resp_HTML .= '">';
+
             $resp_HTML .= '<span class="idx-auth">' . $author_last;
             $resp_HTML .= ( !empty( $author_first ) ) ? ', ' . $author_first : '';
 

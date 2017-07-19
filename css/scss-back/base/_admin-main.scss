@@ -28,15 +28,20 @@
     }
 }
 
+span.tooltip {
+    font-style: italic;
+    font-size: 12px;
+    margin: 0px 5px;
+}
+
 .form-div {
 
-    width: 80%;
+    width: 78%;
+    margin-top: 20px;
+    padding: 5px 10px 10px 10px;
 
-    span.tooltip {
-        font-style: italic;
-        font-size: 12px;
-        margin: 0px 5px;
-    }
+    border: 1px solid rgb(200, 200, 200);
+    @include border-radius(8px);
 }
 
 #categories {
