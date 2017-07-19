@@ -1,0 +1,33 @@
+#alpha-bar {
+
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    padding: 5px 0px;
+    margin: 10px 0px;
+
+    .alpha-filter {
+
+        margin: 0px 10px;
+
+        p {
+            margin: 0px;
+        }
+    }
+
+    .has-results {
+
+        a {
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .active-alpha {
+
+        a {
+            font-weight: 700;
+        }
+    }
+}

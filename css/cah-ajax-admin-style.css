@@ -1,0 +1,48 @@
+/* Main file for back-end SCSS */
+/* --- Utilities --- */
+/* --- Base Styles --- */
+.table-container #existing-queries {
+  border-collapse: collapse; }
+  .table-container #existing-queries tr th, .table-container #existing-queries td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px; }
+    .table-container #existing-queries tr th:not(:nth-child(3)), .table-container #existing-queries td:not(:nth-child(3)) {
+      text-transform: capitalize; }
+  .table-container #existing-queries tr th {
+    background-color: black;
+    color: white; }
+  .table-container #existing-queries tr:nth-child(odd) {
+    background-color: rgba(150, 150, 150, 0.5); }
+
+.form-div {
+  width: 80%; }
+  .form-div span.tooltip {
+    font-style: italic;
+    font-size: 12px;
+    margin: 0px 5px; }
+
+#categories {
+  margin-bottom: 5px; }
+  #categories span {
+    margin: 0px 5px; }
+    #categories span input {
+      margin-right: 5px; }
+
+#edit-dialog > fieldset > label {
+  font-weight: bold; }
+
+#edit-dialog > fieldset legend {
+  font-weight: bold; }
+
+#edit-dialog > fieldset > fieldset {
+  padding: 5px 0px; }
+  #edit-dialog > fieldset > fieldset span {
+    margin: 0px 5px; }
+    #edit-dialog > fieldset > fieldset span input {
+      margin-right: 5px; }
+  #edit-dialog > fieldset > fieldset:not(#edit-display-as) {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap; }

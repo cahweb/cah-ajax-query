@@ -1,0 +1,93 @@
+#nav-button-row {
+
+	justify-content: space-between;
+
+	.flex-item-nav {
+
+		margin: 5px;
+		padding: 0px;
+		@include border-radius(8px);
+		border: 1px solid black;
+		@include quick-set-transition(initial);
+
+		p {
+			margin: 0px;
+			padding: 0px 5px;
+			font-size: 14px;
+		}
+
+		&:hover {
+			background: black;
+			color: white;
+			@include border-radius(7px);
+		}
+
+		&:active {
+			@extend :hover;
+		}
+
+		a {
+			line-height: 2.0;
+			padding: 0px 5px;
+			font-size: 14px;
+		}
+
+		span {
+			line-height: 2.0;
+			padding: 0px 5px;
+			font-size: 14px;
+		}
+
+		&:not(.disabled) {
+			cursor: pointer;
+		}
+	}
+
+	.disabled {
+		cursor: default;
+		color: rgb(150, 150, 150);
+		border: 1px solid rgb(150, 150, 150);
+
+		&:hover {
+			background: white;
+			color: rgb(150, 150, 150);
+			@include border-radius(8px);
+		}
+
+		a {
+			cursor: default;
+		}
+	}
+
+	#pages {
+
+		&:hover {
+			background: white;
+			color: black;
+			@include border-radius(8px);
+		}
+
+		.current {
+			cursor: default;
+			font-weight: bold;
+			text-decoration: underline;
+		}
+
+		a {
+
+			&:hover {
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+div {
+
+	.article-row, .flex-item, .flex-item-nav {
+
+		a {
+			color: inherit;
+		}
+	}
+}

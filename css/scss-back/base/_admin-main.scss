@@ -1,0 +1,88 @@
+.table-container {
+
+    #existing-queries {
+
+        border-collapse: collapse;
+
+        tr th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px;
+
+            &:not(:nth-child(3)) {
+                text-transform: capitalize;
+            }
+        }
+
+        tr {
+
+            th {
+                background-color: black;
+                color: white;
+            }
+
+            &:nth-child(odd) {
+            background-color: rgba(150, 150, 150, 0.5);
+            }
+        }
+    }
+}
+
+.form-div {
+
+    width: 80%;
+
+    span.tooltip {
+        font-style: italic;
+        font-size: 12px;
+        margin: 0px 5px;
+    }
+}
+
+#categories {
+
+    margin-bottom: 5px;
+
+    span {
+
+        margin: 0px 5px;
+
+        input {
+
+            margin-right: 5px;
+        }
+    }
+}
+
+#edit-dialog {
+
+    > fieldset {
+
+        > label {
+            font-weight: bold;
+        }
+
+        legend {
+            font-weight: bold;
+        }
+
+        > fieldset {
+
+            padding: 5px 0px;
+
+            span {
+
+                margin: 0px 5px;
+
+                input {
+                    margin-right: 5px;
+                }
+            }
+
+            &:not(#edit-display-as) {
+
+                @include flexbox;
+            }
+        }
+    }
+}

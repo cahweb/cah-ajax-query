@@ -1,0 +1,25 @@
+{
+  "name": "cah-ajax-query",
+  "version": "0.0.1",
+  "description": "generated paginated post results with AJAX",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css-front": "./bin/build-css-front",
+    "build-css-back": "./bin/build-css-back",
+    "watch-css-front": "./bin/watch-css-front",
+    "watch-css-back": "./bin/watch-css-back"
+  },
+  "author": "Mike W. Leavitt",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cahweb/cah-ajax-query.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cahweb/cah-ajax-query/issues"
+  },
+  "homepage": "https://github.com/cahweb/cah-ajax-query#readme"
+}

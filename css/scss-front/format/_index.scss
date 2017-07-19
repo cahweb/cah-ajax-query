@@ -1,0 +1,17 @@
+#results-display {
+
+    .aqf {
+        list-style-image: url('../images/Aquifer-A-28x18.png');
+    }
+
+    .tfr {
+        list-style-image: url('../images/TFR-logo-28x19.png');
+    }
+
+    ul li {
+
+        span {
+            margin: 5px;
+        }
+    }
+}
