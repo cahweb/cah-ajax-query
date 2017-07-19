@@ -11,7 +11,7 @@
  * Plugin Name: Common - Post Query (AJAX)
  * Plugin URI:
  * Description: A plugin that can utilize the built-in WordPress query objects to load posts asynchronously with JavaScript.
- * Version: 0.0.1
+ * Version: 1.0.0
  * Author: Mike W. Leavitt
  * Author URI:
  * Text Domain: cah-ajax-query
@@ -320,16 +320,24 @@ function cah_ajax_query_retrieve_index() {
 
     $resp_HTML = '';
 
+    // Post type to display
     $type                  = ( isset($_POST['type'] )                  && !empty( $_POST['type'] ) )                ? $_POST['type']                        : 'post'; // Defaults to Post
+    // Categories to display
 	$display_categories    = ( isset($_POST['categories'] )            && !empty( $_POST['categories'] ) )          ? json_decode( stripslashes( $_POST['categories'] ) )   : NULL;
-	$per_page              = ( isset( $_POST['per_page'] )             && !empty($_POST['per_page'] ) )             ? $_POST['per_page']                    : 10; // Defaults to 10
+    // Posts per page
+    $per_page              = ( isset( $_POST['per_page'] )             && !empty($_POST['per_page'] ) )             ? $_POST['per_page']                    : 10; // Defaults to 10
+    // A persistent category (i.e., one that will always apply to every query on this particular page)
     $persistent_category   = ( isset( $_POST['persistent_category'] )  && !empty( $_POST['persistent_category'] ) ) ? $_POST['persistent_category']         : '';
-	$genre                 = ( isset( $_POST['genre'] )                && !empty( $_POST['genre'] ) )               ? $_POST['genre']                       : '';
-	$paged                 = ( isset( $_POST['page'] )                 && !empty( $_POST['page'] ) )                ? $_POST['page']                        : 1;
+    // A genre to filter results, if applicable.
+    $genre                 = ( isset( $_POST['genre'] )                && !empty( $_POST['genre'] ) )               ? $_POST['genre']                       : '';
+    // For a paged query, the particular page being requested.
+    $paged                 = ( isset( $_POST['page'] )                 && !empty( $_POST['page'] ) )                ? $_POST['page']                        : 1;
+    // The letter selected, to narrow results.
     $alpha                 = ( isset( $_POST['alpha'] )                && !empty( $_POST['alpha'] ) )               ? $_POST['alpha']                       : '';
 
     $query_categories = '';
 
+    // Builds the 'category_name' argument for the query.
     if ( !empty( $persistent_category ) ) {
 
         $query_categories = $persistent_category;
@@ -344,6 +352,7 @@ function cah_ajax_query_retrieve_index() {
         $query_categories = $genre;
     }
 
+    // Modifies the meta_query array to only pull the selected letter, if applicable.
     if ( empty( $alpha ) ) {
 
         $query_meta = array(
@@ -360,6 +369,8 @@ function cah_ajax_query_retrieve_index() {
 
     } else {
 
+        // Matching with RegExp was the best way I found to make sure the query is only pulling
+        // the initial letter.
         $alpha_patt = '^' . $alpha;
 
         $query_meta = array(
@@ -376,6 +387,7 @@ function cah_ajax_query_retrieve_index() {
         );
     } // End if
 
+    // The args to pass to the global $wp-query object with query_posts().
 	$args = array(
 		'post_type'         => $type,
 		'post_status'       => 'publish',
@@ -387,24 +399,14 @@ function cah_ajax_query_retrieve_index() {
         )
 	);
 
-    if ( !empty( $alpha ) ) {
-
-        foreach( $args['meta_query'] as $entry ) {
-
-            if ( is_array( $entry ) && $entry['key'] == 'author1-last' ) {
-
-                $entry['compare'] = 'LIKE';
-                $entry['value'] = $alpha;
-            } // End if
-        } // End foreach
-    } // End if
-
     if ( !empty( $query_categories ) )
         $args['category_name'] = $query_categories;
 
 	if ( !empty( $paged ) && $per_page != -1 )
 		$args['paged'] = $paged;
 
+    // This is a quick secondary query, just grabbing relevant Post IDs in order to determine
+    // which alphabet letters the user is able to filter by.
     $alpha_args = array(
         'post_type'         => $type,
 		'post_status'       => 'publish',
@@ -434,6 +436,8 @@ function cah_ajax_query_retrieve_index() {
 
     if ( $alpha_query->have_posts() ) {
 
+        // The letters that end up in this array will be the filterable letters--the ones
+        // which have results that begin with them.
         $alpha_results = array();
 
         foreach( $alpha_query->posts as $id ) {
@@ -446,14 +450,18 @@ function cah_ajax_query_retrieve_index() {
         } // End foreach
     } // End if
 
+    // Pass our actual arguments to the main $wp_query object
 	query_posts($args);
 
-    //$query = new WP_Query( $args );
 
+    // The Loop
     if ( have_posts() ) {
 
+        // Building the alphabet filter.
         $resp_HTML .= '<div id="alpha-bar" class="flex-container">';
 
+        // I found out you can iterate through letters, which is neat. You just can't do $i <= 'Z' as the breakout argument, because for some reason
+        // it doesn't stop until 'YZ'. So I just had it stop as soon as it's 'AA'. Works fine.
         for( $i = 'A'; $i != 'AA'; $i++ ) {
 
             $is_there = ( isset( $alpha_results ) && in_array( $i, $alpha_results ) ) ? true : false;
@@ -463,6 +471,8 @@ function cah_ajax_query_retrieve_index() {
             $resp_HTML .= ( strcasecmp( $alpha, $i ) == 0 ) ? ' active-alpha' : '';
             $resp_HTML .= '">';
 
+            // This is all going to be handled with JS on the front-end; the <a> tags are markers that the
+            // script can recognize and attach Event Handlers to.
             $resp_HTML .= ( $is_there ) ? '<a href="javascript:;">' : '';
 
             $resp_HTML .= '<p>' . $i . '</p>';
@@ -576,6 +586,7 @@ function cah_ajax_query_retrieve_index() {
 
         $resp_HTML .= '</ul>';
 
+        // Reset the base post object, as is only polite.
         wp_reset_postdata();
 
         // Pagination and navigation links.
@@ -632,8 +643,10 @@ function cah_ajax_query_retrieve_index() {
         $resp_HTML .= '</div>';
     } // End if
 
+    // Reset the $wp_query object, so the WP gods don't get mad at you.
     wp_reset_query();
 
+    // Send back the response.
     echo $resp_HTML;
 
     wp_die();

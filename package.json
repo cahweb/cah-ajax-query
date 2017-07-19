@@ -1,6 +1,6 @@
 {
   "name": "cah-ajax-query",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "generated paginated post results with AJAX",
   "main": "index.js",
   "dependencies": {},
