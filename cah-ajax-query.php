@@ -19,8 +19,16 @@
  * Licence URI:
  */
 
-require_once( $_SERVER['DOCUMENT_ROOT'] . '\\\wp-config.php' );
-require_once( $_SERVER['DOCUMENT_ROOT'] . '\\\wp-load.php' );
+$config_path = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'wp-config.php';
+if ( !file_exists( $config_path ) )
+    $config_path = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'wordpress' . DIRECTORY_SEPARATOR . 'wp-config.php';
+
+$load_path = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'wp-load.php';
+if ( !file_exists( $load_path ) )
+    $load_path = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'wordpress' . DIRECTORY_SEPARATOR . 'wp-load.php';
+
+require_once( $config_path );
+require_once( $load_path );
 
 require_once( 'cah-ajax-query-options.php' );
 
