@@ -28,3 +28,31 @@
         }
     }
 }
+
+@media (max-width: 992px) {
+
+    #results-display ul li {
+
+        line-height: 1.50;
+        margin: 10px 0px;
+
+        &:first-child {
+
+            margin-top: 0px;
+        }
+
+        &:last-child {
+
+            margin-bottom: 0px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    #results-display ul {
+
+        padding: 5px 5px;
+
+    }
+}

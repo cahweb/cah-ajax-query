@@ -811,7 +811,7 @@ function cah_ajax_query_menu_html() {
     } else {
             ?>
                     <tr>
-                        <td colspan="9" stlye="text-align: center;">Sorry, there were no queries to display.</td>
+                        <td colspan="10" stlye="text-align: center;">Sorry, there were no queries to display.</td>
                     </tr>
             <?
     } // End if

@@ -162,3 +162,16 @@ div .article-row a, div .flex-item a, div .flex-item-nav a {
     height: 1em;
     width: auto;
     margin-right: 5px; }
+
+@media (max-width: 992px) {
+  #results-display ul li {
+    line-height: 1.50;
+    margin: 10px 0px; }
+    #results-display ul li:first-child {
+      margin-top: 0px; }
+    #results-display ul li:last-child {
+      margin-bottom: 0px; } }
+
+@media (max-width: 768px) {
+  #results-display ul {
+    padding: 5px 5px; } }
