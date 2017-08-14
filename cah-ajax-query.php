@@ -509,11 +509,21 @@ function cah_ajax_query_retrieve_index() {
 			$categories     = get_the_category();
 
             $resp_HTML .= '<li';
-
-            $resp_HTML .= ( in_category( 'aquifer' ) ) ? ' class="aqf">' : ' class="tfr">';
+			if ( in_category( 'aquifer' ) )
+				$resp_HTML .= ' class="aqf"';
+			elseif ( in_category( 'florida-review' ) )
+				$resp_HTML .= ' class="tfr"';
+			else
+				$resp_HTML .= ' class="tfr"';
+			$resp_HTML .= '>';
 
             $resp_HTML .= '<img src="' . plugin_dir_url( __FILE__ );
-            $resp_HTML .= ( in_category( 'aquifer' ) ) ? 'images/TFR-Aquifer-Bullet.svg' : 'images/TFR-Bird-Bullet.svg';
+			if ( in_category( 'aquifer' ) )
+				$resp_HTML .= 'images/TFR-Aquifer-Bullet.svg';
+			elseif ( in_category( 'florida-review' ) )
+				$resp_HTML .= 'images/TFR-Bird-Bullet.svg';
+			else
+				$resp_HTML .= 'images/TFR-Bird-Bullet.svg';
             $resp_HTML .= '">';
 
             $resp_HTML .= '<span class="idx-auth">' . $author_last;
@@ -582,11 +592,64 @@ function cah_ajax_query_retrieve_index() {
             } else {
 
                 $resp_HTML .= 'CATEGORY PARSE ERROR';
-            }
+            } // if
 
             $resp_HTML .= '</em></span>';
+			$resp_HTML .= ' | <span class="idx-pub-date"><em>Published ';
 
-            $resp_HTML .= ' | <span class="idx-pub-date"><em>Published ' . $pub_date . '</em></span>';
+			// For TFR items, we have to grab the publication date of the associated issue.
+			if ( in_category( 'florida-review' ) ) {
+
+				$issue_full = get_post_meta( $id, 'issue', true );
+				$iss_tmp = explode( '.', $issue_full );
+				$issue_info = array(
+					'volume' => $iss_tmp[0],
+					'issue' => str_replace(',', ' & ', $iss_tmp[1])
+				);
+
+				$iss_meta_qry = array(
+					'relation' => 'AND',
+					array(
+						'key' => 'vol-num',
+						'value' => $issue_info['volume'],
+						'compare' => '='
+					),
+					array(
+						'key' => 'issue-num',
+						'value' => $issue_info['issue'],
+						'compare' => '='
+					)
+				);
+
+				$iss_qry_args = array(
+					'post_type' => 'issue',
+					'post_status' => 'publish',
+					'posts_per_page' => 1,
+					'meta_query' => $iss_meta_qry,
+					'fields' => 'ids'
+				);
+
+				$issue = new WP_Query( $iss_qry_args );
+
+				if ( $issue->have_posts() ) {
+					$pub_date_raw = get_post_meta( $issue->posts[0], 'pub-date', true );
+					$pub_date_obj = maybe_unserialize( $pub_date_raw );
+
+					$pub_date_clean = date_format( $pub_date_obj, 'F j, Y');
+
+					$resp_HTML .= 'in <a href="' . get_the_permalink( $issue->posts[0] ) . '">Vol. ' . $issue_full . '</a>, ' . $pub_date_clean;
+
+				} else {
+
+					$resp_HTML .= $pub_date;
+				} // if
+
+			} else {
+
+            	$resp_HTML .= $pub_date;
+			} // if
+
+			$resp_HTML .= '</em></span>';
 
             $resp_HTML .= '</li>';
 
