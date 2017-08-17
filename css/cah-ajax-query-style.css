@@ -25,7 +25,9 @@
       padding: 0px 5px;
       font-size: 14px;
       font-weight: 700; }
-    .flex-container .flex-item :hover, .flex-container .flex-item :active, .flex-container .flex-item #nav-button-row .flex-item-nav:active, #nav-button-row .flex-container .flex-item .flex-item-nav:active {
+    .flex-container .flex-item a {
+      text-decoration: none; }
+    .flex-container .flex-item:hover, .flex-container .flex-item:active, .flex-container #nav-button-row .flex-item.flex-item-nav:active, #nav-button-row .flex-container .flex-item.flex-item-nav:active {
       background: black;
       color: white;
       -webkit-border-radius: 7px;
@@ -39,6 +41,8 @@
     -moz-border-radius: 7px;
     -ms-border-radius: 7px;
     border-radius: 7px; }
+    .flex-container .active a {
+      text-decoration: none; }
 
 #alpha-bar {
   border-bottom: 1px solid black;
@@ -49,7 +53,7 @@
     margin: 0px 10px; }
     #alpha-bar .alpha-filter p {
       margin: 0px; }
-  #alpha-bar .has-results a:hover, #alpha-bar .has-results .flex-container .flex-item a:active, .flex-container .flex-item #alpha-bar .has-results a:active, #alpha-bar .has-results #nav-button-row a.flex-item-nav:active, #nav-button-row #alpha-bar .has-results a.flex-item-nav:active {
+  #alpha-bar .has-results a:hover, #alpha-bar .has-results .flex-container a.flex-item:active, .flex-container #alpha-bar .has-results a.flex-item:active, #alpha-bar .has-results #nav-button-row a.flex-item-nav:active, #nav-button-row #alpha-bar .has-results a.flex-item-nav:active {
     text-decoration: underline; }
   #alpha-bar .active-alpha a {
     font-weight: 700; }
@@ -93,7 +97,7 @@
     cursor: default;
     color: #969696;
     border: 1px solid #969696; }
-    #nav-button-row .disabled:hover, #nav-button-row .flex-container .flex-item .disabled:active, .flex-container .flex-item #nav-button-row .disabled:active, #nav-button-row .disabled.flex-item-nav:active {
+    #nav-button-row .disabled:hover, #nav-button-row .flex-container .disabled.flex-item:active, .flex-container #nav-button-row .disabled.flex-item:active, #nav-button-row .disabled.flex-item-nav:active {
       background: white;
       color: #969696;
       -webkit-border-radius: 8px;
@@ -102,7 +106,9 @@
       border-radius: 8px; }
     #nav-button-row .disabled a {
       cursor: default; }
-  #nav-button-row #pages:hover, #nav-button-row .flex-container .flex-item #pages:active, .flex-container .flex-item #nav-button-row #pages:active, #nav-button-row #pages.flex-item-nav:active {
+  #nav-button-row #prev-button a, #nav-button-row #next-button a {
+    text-decoration: none; }
+  #nav-button-row #pages:hover, #nav-button-row .flex-container #pages.flex-item:active, .flex-container #nav-button-row #pages.flex-item:active, #nav-button-row #pages.flex-item-nav:active {
     background: white;
     color: black;
     -webkit-border-radius: 8px;
@@ -113,7 +119,7 @@
     cursor: default;
     font-weight: bold;
     text-decoration: underline; }
-  #nav-button-row #pages a:hover, #nav-button-row #pages .flex-container .flex-item a:active, .flex-container .flex-item #nav-button-row #pages a:active, #nav-button-row #pages a.flex-item-nav:active {
+  #nav-button-row #pages a:hover, #nav-button-row #pages .flex-container a.flex-item:active, .flex-container #nav-button-row #pages a.flex-item:active, #nav-button-row #pages a.flex-item-nav:active {
     font-weight: bold; }
 
 div .article-row a, div .flex-item a, div .flex-item-nav a {

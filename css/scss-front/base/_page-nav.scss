@@ -59,6 +59,12 @@
 		}
 	}
 
+	#prev-button, #next-button {
+		a {
+			text-decoration: none;
+		}
+	}
+
 	#pages {
 
 		&:hover {

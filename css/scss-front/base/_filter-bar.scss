@@ -18,13 +18,17 @@
 			font-weight: 700;
 		}
 
-		:hover {
+		a {
+			text-decoration: none;
+		}
+
+		&:hover {
 			background: black;
 			color: white;
 			@include border-radius(7px);
 		}
 
-		:active {
+		&:active {
 			@extend :hover;
 		}
 	}
@@ -33,5 +37,9 @@
 		background: black;
 		color: white;
 		@include border-radius(7px);
+
+		a {
+			text-decoration: none;
+		}
 	}
 }

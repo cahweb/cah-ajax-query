@@ -571,7 +571,7 @@ function cah_ajax_query_retrieve_index() {
                 $cats = array();
                 foreach ( $categories as $category ) {
 
-                    if ( $category->slug == 'aquifer' || $category->slug == 'tfr' )
+                    if ( $category->slug == 'aquifer' || $category->slug == 'florida-review' )
                         continue;
 
                     if ( in_array( $category->slug, $display_categories ) && strcasecmp( $category->slug, $persistent_category ) != 0 )
@@ -604,7 +604,7 @@ function cah_ajax_query_retrieve_index() {
 				$iss_tmp = explode( '.', $issue_full );
 				$issue_info = array(
 					'volume' => $iss_tmp[0],
-					'issue' => str_replace(',', ' & ', $iss_tmp[1])
+					'issue' => ( empty( $iss_tmp[1] ) || $iss_tmp[1] == ' ' ) ? '1' : str_replace( ' &amp; ', ' & ', str_replace(',', ' & ', $iss_tmp[1] ) )
 				);
 
 				$iss_meta_qry = array(
@@ -637,7 +637,7 @@ function cah_ajax_query_retrieve_index() {
 
 					$pub_date_clean = date_format( $pub_date_obj, 'F j, Y');
 
-					$resp_HTML .= 'in <a href="' . get_the_permalink( $issue->posts[0] ) . '">Vol. ' . $issue_full . '</a>, ' . $pub_date_clean;
+					$resp_HTML .= 'in <a href="' . get_the_permalink( $issue->posts[0] ) . '">Vol. ' . $issue_info['volume'] . '.' . $issue_info['issue'] . '</a>, ' . $pub_date_clean;
 
 				} else {
 

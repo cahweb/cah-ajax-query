@@ -216,13 +216,13 @@ function updateSelection( elem ) {
 
     // Removes the "active" class from any buttons that have it, and makes the triggering
     // element the active one.
-    jQuery('#filter-bar .flex-item').each(function() {
+    parentElem.find('#filter-bar .flex-item').each(function() {
 
         if ( jQuery(this).hasClass('active') )
             jQuery(this).removeClass('active');
     });
 
-    jQuery(elem).addClass('active');
+    parentElem.find(elem).addClass('active');
 } // End updateSelection
 
 
@@ -306,6 +306,22 @@ function getNewResults( elem ) {
         doAction = cahAjax.actionArchive;
     else if (cahAjax.displayAs == 'index')
         doAction = cahAjax.actionIndex;
+
+	// I put this in here for debug purposes, in case you need to figure out what data is being sent to the server.
+	/*
+	var debugData = {
+		'action': doAction,
+		'type': cahAjax.postType,
+		'categories': cahAjax.categories,
+		'display_as': cahAjax.displayAs,
+		'persistent_category': cahAjax.persistentCategory,
+		'per_page': cahAjax.postsPerPage,
+		'genre': reqGenre,
+		'page': reqPage,
+		'alpha': reqAlpha
+	};
+	console.log(debugData);
+	*/
 
     // The AJAX request.
     jQuery.ajax({
