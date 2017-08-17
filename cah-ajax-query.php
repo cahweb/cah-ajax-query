@@ -275,7 +275,7 @@ function cah_ajax_query_retrieve_archive() {
 
         // Pagination
 		$page_links = paginate_links( array(
-			'mid_size' 	=> 2,
+			'mid_size' 	=> 3,
 			'prev_next' => false,
 			'type' 		=> 'array'
 		) );
@@ -677,7 +677,7 @@ function cah_ajax_query_retrieve_index() {
 
         // Pagination
 		$page_links = paginate_links( array(
-			'mid_size' 	=> 2,
+			'mid_size' 	=> 9,
 			'prev_next' => false,
 			'type' 		=> 'array'
 		) );
